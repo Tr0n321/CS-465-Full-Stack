@@ -5,17 +5,21 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('hbs');
 
+// Connect to MongoDB.
+require('./app_api/models/db');
+
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
 var travelRouter = require('./app_server/routes/travel');
+var apiRouter = require('./app_api/routes/index');
 
 var app = express();
 
-// View engine setup
+// View engine setup.
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'hbs');
 
-// Register Handlebars partials
+// Register Handlebars partials.
 hbs.registerPartials(
   path.join(__dirname, 'app_server', 'views', 'partials')
 );
@@ -26,20 +30,23 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Application routes.
 app.use('/', indexRouter);
 app.use('/travel', travelRouter);
 app.use('/users', usersRouter);
 
-// Catch 404 and forward to error handler
-app.use(function(req, res, next) {
+// REST API routes.
+app.use('/api', apiRouter);
+
+// Catch 404 and forward to error handler.
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// Error handler
-app.use(function(err, req, res, next) {
+// Error handler.
+app.use(function (err, req, res, next) {
   res.locals.message = err.message;
-  res.locals.error =
-    req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);
   res.render('error');
