@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hbs = require('hbs');
+var cors = require('cors');
 
 // Connect to MongoDB.
 require('./app_api/models/db');
@@ -14,6 +15,9 @@ var travelRouter = require('./app_server/routes/travel');
 var apiRouter = require('./app_api/routes/index');
 
 var app = express();
+
+// Enable CORS for the Angular SPA.
+app.use(cors());
 
 // View engine setup.
 app.set('views', path.join(__dirname, 'app_server', 'views'));
@@ -32,22 +36,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Application routes.
 app.use('/', indexRouter);
-app.use('/travel', travelRouter);
 app.use('/users', usersRouter);
-
-// REST API routes.
+app.use('/travel', travelRouter);
 app.use('/api', apiRouter);
 
 // Catch 404 and forward to error handler.
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   next(createError(404));
 });
 
 // Error handler.
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
+  // Set locals, only providing error in development.
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  // Render the error page.
   res.status(err.status || 500);
   res.render('error');
 });

@@ -1,0 +1,28 @@
+<div class="card p-3 mb-4">
+  <h2>Delete Trip</h2>
+
+  <div class="mb-3">
+    <label for="deleteTripCode" class="form-label">Trip Code</label>
+
+    <input
+      type="text"
+      id="deleteTripCode"
+      class="form-control"
+      [(ngModel)]="tripCode"
+      placeholder="Enter trip code"
+    />
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-danger"
+    (click)="deleteTrip()">
+    Delete Trip
+  </button>
+
+  @if (message) {
+    <div class="alert alert-info mt-3">
+      {{ message }}
+    </div>
+  }
+</div>

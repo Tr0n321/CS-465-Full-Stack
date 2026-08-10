@@ -1,0 +1,133 @@
+<div class="container mt-4 mb-5">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Edit Trip</h2>
+
+      <div class="mb-3">
+        <label class="form-label">Trip Code to Edit</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="tripCode"
+            placeholder="Example: TEST260809"
+          />
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="loadTrip()"
+          >
+            Load Trip
+          </button>
+        </div>
+      </div>
+
+      @if (message()) {
+        <div class="alert alert-info">
+          {{ message() }}
+        </div>
+      }
+
+      @if (loaded()) {
+        <form (ngSubmit)="updateTrip()">
+
+          <div class="mb-3">
+            <label class="form-label">Trip Code</label>
+            <input
+              type="text"
+              class="form-control"
+              name="code"
+              [(ngModel)]="trip.code"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Trip Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              [(ngModel)]="trip.name"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Length</label>
+            <input
+              type="text"
+              class="form-control"
+              name="length"
+              [(ngModel)]="trip.length"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              name="start"
+              [(ngModel)]="trip.start"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Resort</label>
+            <input
+              type="text"
+              class="form-control"
+              name="resort"
+              [(ngModel)]="trip.resort"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Price per Person</label>
+            <input
+              type="number"
+              class="form-control"
+              name="perPerson"
+              [(ngModel)]="trip.perPerson"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Image</label>
+            <select
+              class="form-select"
+              name="image"
+              [(ngModel)]="trip.image"
+            >
+              <option value="reef1.jpg">reef1.jpg</option>
+              <option value="reef2.jpg">reef2.jpg</option>
+              <option value="reef3.jpg">reef3.jpg</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              rows="4"
+              name="description"
+              [(ngModel)]="trip.description"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-warning">
+            Update Trip
+          </button>
+
+        </form>
+      }
+    </div>
+  </div>
+</div>
