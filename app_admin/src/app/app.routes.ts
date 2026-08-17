@@ -1,3 +1,30 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import { TripListingComponent } from './trip-listing/trip-listing';
+import { AddTripComponent } from './add-trip/add-trip';
+import { EditTripComponent } from './edit-trip/edit-trip';
+import { DeleteTripComponent } from './delete-trip/delete-trip';
+import { Login } from './login/login';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: TripListingComponent
+  },
+  {
+    path: 'add-trip',
+    component: AddTripComponent
+  },
+  {
+    path: 'edit-trip',
+    component: EditTripComponent
+  },
+  {
+    path: 'delete-trip',
+    component: DeleteTripComponent
+  },
+  {
+    path: 'login',
+    component: Login
+  }
+];

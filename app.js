@@ -6,8 +6,18 @@ var logger = require('morgan');
 var hbs = require('hbs');
 var cors = require('cors');
 
+// Load environment variables.
+require('dotenv').config();
+
 // Connect to MongoDB.
 require('./app_api/models/db');
+
+// Register the User model.
+require('./app_api/models/user');
+
+// Wire in Passport authentication.
+var passport = require('passport');
+require('./app_api/config/passport');
 
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
@@ -33,6 +43,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Initialize Passport.
+app.use(passport.initialize());
 
 // Application routes.
 app.use('/', indexRouter);

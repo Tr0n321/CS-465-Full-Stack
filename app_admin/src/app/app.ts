@@ -1,20 +1,14 @@
 import { Component } from '@angular/core';
-import { TripListingComponent } from './trip-listing/trip-listing';
-import { AddTripComponent } from './add-trip/add-trip';
-import { EditTripComponent } from './edit-trip/edit-trip';
-import { DeleteTripComponent } from './delete-trip/delete-trip';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    AddTripComponent,
-    EditTripComponent,
-    DeleteTripComponent,
-    TripListingComponent
+    RouterLink,
+    RouterOutlet
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-}
+export class App {}

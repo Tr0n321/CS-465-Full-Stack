@@ -1,11 +1,10 @@
-<div class="container">
+<div class="container mt-4">
   <h1>Travlr Getaways Admin</h1>
 
-  <app-add-trip></app-add-trip>
+  <nav class="mb-4">
+    <a routerLink="/" class="btn btn-outline-primary me-2">Trips</a>
+    <a routerLink="/login" class="btn btn-outline-secondary">Admin Login</a>
+  </nav>
 
-  <app-edit-trip></app-edit-trip>
-
-  <app-delete-trip></app-delete-trip>
-
-  <app-trip-listing></app-trip-listing>
+  <router-outlet></router-outlet>
 </div>
